@@ -1,6 +1,6 @@
 {
   "name": "postcss-reason-modules",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "PostCSS plugin to create reasonml modules from css modules",
   "keywords": [
     "postcss",
