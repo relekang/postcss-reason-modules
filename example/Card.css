@@ -1,0 +1,14 @@
+.card {
+  padding: 1.6rem;
+  background: var(--card-background);
+  color: var(--card-text-color);
+  border-radius: 4px;
+
+  p {
+    margin: 0;
+  }
+  
+  a {
+    color: var(--card-text-color);
+  }
+}

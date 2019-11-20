@@ -1,0 +1,1 @@
+[@bs.module "./Card.css"] external card: string = "card";
