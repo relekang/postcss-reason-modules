@@ -19,10 +19,10 @@
   "repository": "relekang/postcss-reason-modules",
   "dependencies": {
     "debug": "^4.1.1",
-    "eslint-config-relekang": "^1.3.1",
     "postcss": "^7.0.23"
   },
   "devDependencies": {
+    "eslint-config-relekang": "^1.3.1",
     "eslint": "^6.2.2",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-eslint-comments": "^3.1.2",
@@ -35,6 +35,11 @@
   "engines": {
     "node": ">=8.0.0"
   },
+  "files": [
+    "index.js",
+    "license",
+    "changelog.md"
+  ],
   "jest": {
     "testEnvironment": "node"
   }
