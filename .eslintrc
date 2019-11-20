@@ -4,3 +4,5 @@ extends:
   - relekang/configs/jest
 env:
   node: true
+globals:
+  Set: false

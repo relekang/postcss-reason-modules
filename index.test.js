@@ -12,33 +12,46 @@ async function run(input, output, opts, fileOpts) {
   expect(result.warnings()).toHaveLength(0);
 }
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
+describe('postcss-reason-modules', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-test('Plugin creates file when input is file', async () => {
-  await run(
-    '.wrapper{ }',
-    '.wrapper{ }',
-    {},
-    {
-      from: '/tmp/postcss-reason-/modules/example/one.css',
-      file: {
-        dirname: '/tmp/postcss-reason-/modules/example',
-        basename: 'one.css',
-        extname: '.css',
-      },
-    }
-  );
+  it('should create file when input is file', async () => {
+    await run(
+      '.wrapper{ }',
+      '.wrapper{ }',
+      {},
+      {
+        from: '/tmp/postcss-reason-/modules/example/one.css',
+      }
+    );
 
-  expect(fs.writeFileSync).toHaveBeenCalledWith(
-    '/tmp/postcss-reason-/modules/example/oneCss.re',
-    '[@bs.module "./one.css"] external wrapper: string = "wrapper";'
-  );
-});
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      '/tmp/postcss-reason-/modules/example/oneCss.re',
+      '[@bs.module "./one.css"] external wrapper: string = "wrapper";'
+    );
+  });
 
-test('Plugin does not create file when input is file', async () => {
-  await run('.wrapper{ }', '.wrapper{ }', {}, { from: undefined });
+  it('should not create file when input is file', async () => {
+    await run('.wrapper{ }', '.wrapper{ }', {}, { from: undefined });
 
-  expect(fs.writeFileSync).not.toHaveBeenCalled();
+    expect(fs.writeFileSync).not.toHaveBeenCalled();
+  });
+
+  it('should filter out pseudo class', async () => {
+    await run(
+      '.wrapper: {}\n.wrapper:hover{ }',
+      '.wrapper: {}\n.wrapper:hover{ }',
+      {},
+      {
+        from: '/tmp/postcss-reason-/modules/example/one.css',
+      }
+    );
+
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      '/tmp/postcss-reason-/modules/example/oneCss.re',
+      '[@bs.module "./one.css"] external wrapper: string = "wrapper";'
+    );
+  });
 });

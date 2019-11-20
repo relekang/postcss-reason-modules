@@ -32,9 +32,6 @@
     "prettier": "^1.18.2",
     "standard-version": "^7.0.1"
   },
-  "eslintConfig": {
-    "extends": "eslint-config-postcss"
-  },
   "engines": {
     "node": ">=8.0.0"
   },
