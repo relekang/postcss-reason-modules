@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-rc.4](https://github.com/relekang/postcss-reason-modules/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2019-11-21)
+
+
+### Bug Fixes
+
+* Add filtering of global ([c3402ce](https://github.com/relekang/postcss-reason-modules/commit/c3402cec4e082a82c32cb38f8388cd6169766141))
+
 ## [1.0.0-rc.3](https://github.com/relekang/postcss-reason-modules/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2019-11-21)
 
 
