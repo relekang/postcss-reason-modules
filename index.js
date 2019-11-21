@@ -63,7 +63,11 @@ module.exports = postcss.plugin('postcss-reason-modules', (_opts = {}) => {
       )
       .join('\n');
 
-    fs.writeFileSync(filename, content);
-    debug(`Wrote file to ${filename}`);
+    if (content === '') {
+      debug(`Did not create empty file`);
+    } else {
+      fs.writeFileSync(filename, content);
+      debug(`Wrote file to ${filename}`);
+    }
   };
 });

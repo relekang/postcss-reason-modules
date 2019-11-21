@@ -39,6 +39,17 @@ describe('postcss-reason-modules', () => {
     expect(fs.writeFileSync).not.toHaveBeenCalled();
   });
 
+  it('should not create file when output is empty', async () => {
+    await run(
+      '',
+      '',
+      {},
+      { from: '/tmp/postcss-reason-/modules/example/one.css' }
+    );
+
+    expect(fs.writeFileSync).not.toHaveBeenCalled();
+  });
+
   it('should filter out pseudo class', async () => {
     await run(
       '.wrapper: {}\n.wrapper:hover{ }',
