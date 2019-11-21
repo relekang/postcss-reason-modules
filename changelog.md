@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-rc.3](https://github.com/relekang/postcss-reason-modules/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2019-11-21)
+
+
+### Bug Fixes
+
+* Add support for .class1.class2 ([814dbf7](https://github.com/relekang/postcss-reason-modules/commit/814dbf7f70b4999d1aa22cd4ef7fe010ccf88b79))
+* Check whether file contains content before creating ([131dd53](https://github.com/relekang/postcss-reason-modules/commit/131dd5357bc466d8eb5528b0d33636b99c36acd2))
+
 ## [1.0.0-rc.2](https://github.com/relekang/postcss-reason-modules/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2019-11-20)
 
 
