@@ -54,4 +54,20 @@ describe('postcss-reason-modules', () => {
       '[@bs.module "./one.css"] external wrapper: string = "wrapper";'
     );
   });
+
+  it('should handle joined classes', async () => {
+    await run(
+      '.wrapper.header{ }',
+      '.wrapper.header{ }',
+      {},
+      {
+        from: '/tmp/postcss-reason-/modules/example/one.css',
+      }
+    );
+
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      '/tmp/postcss-reason-/modules/example/oneCss.re',
+      '[@bs.module "./one.css"] external wrapper: string = "wrapper";\n[@bs.module "./one.css"] external header: string = "header";'
+    );
+  });
 });

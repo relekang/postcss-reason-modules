@@ -2,6 +2,36 @@ let postcss = require('postcss');
 let fs = require('fs');
 let path = require('path');
 let debug = require('debug')('postcss-reason-modules');
+let pipe = require('lodash/fp/pipe');
+let flatMap = require('lodash/fp/flatMap');
+let map = require('lodash/fp/map');
+let filter = require('lodash/fp/filter');
+
+let counter = 0;
+function dd(v) {
+  debug(counter++, v);
+  return v;
+}
+
+function classesFromNodes(nodes) {
+  return Array.from(
+    new Set(
+      pipe([
+        flatMap(rule => (rule.selector || '').split(' ')),
+        dd,
+        map(selector => selector.replace(/:.*$/, '')),
+        dd,
+        filter(selector => /^(\.[a-zA-Z0-9]+)+$/.test(selector)),
+        dd,
+        flatMap(selector => selector.split('.')),
+        dd,
+        filter(selector => selector !== ''),
+        dd,
+        map(selector => selector.replace('.', '')),
+      ])(nodes)
+    )
+  );
+}
 
 module.exports = postcss.plugin('postcss-reason-modules', (_opts = {}) => {
   return (root, result) => {
@@ -17,14 +47,12 @@ module.exports = postcss.plugin('postcss-reason-modules', (_opts = {}) => {
 
     debug('basename:', basename);
 
-    const classes = Array.from(
-      new Set(
-        root.nodes
-          .map(rule => (rule.selector || '').replace(/:.*$/, ''))
-          .filter(selector => /^\.[a-zA-Z0-9]+$/.test(selector))
-          .map(selector => selector.replace('.', ''))
-      )
+    debug(
+      'selectors:',
+      root.nodes.map(({ selector }) => selector)
     );
+
+    const classes = classesFromNodes(root.nodes);
 
     debug(`classes: ${JSON.stringify(classes)}`);
 
