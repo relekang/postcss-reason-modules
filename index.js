@@ -17,7 +17,11 @@ function classesFromNodes(nodes) {
   return Array.from(
     new Set(
       pipe([
-        flatMap(rule => (rule.selector || '').split(' ')),
+        map(rule => rule.selector),
+        filter(selector => selector && !selector.includes(':global')),
+        flatMap(selector => (selector || '').split(' ')),
+        dd,
+        flatMap(selector => (selector || '').split(' ')),
         dd,
         map(selector => selector.replace(/:.*$/, '')),
         dd,
