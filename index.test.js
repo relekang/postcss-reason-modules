@@ -4,7 +4,10 @@ let fs = require('fs');
 
 let plugin = require('./');
 
-jest.mock('fs');
+jest.mock('fs', () => ({
+  readFileSync: jest.fn(),
+  writeFileSync: jest.fn(),
+}));
 
 async function run(input, output, opts, fileOpts) {
   let result = await postcss([plugin(opts)]).process(input, fileOpts);
@@ -43,6 +46,20 @@ describe('postcss-reason-modules', () => {
     await run(
       '',
       '',
+      {},
+      { from: '/tmp/postcss-reason-/modules/example/one.css' }
+    );
+
+    expect(fs.writeFileSync).not.toHaveBeenCalled();
+  });
+
+  it('should not create file when output is empty', async () => {
+    fs.readFileSync.mockImplementationOnce(
+      () => '[@bs.module "./one.css"] external wrapper: string = "wrapper";'
+    );
+    await run(
+      '.wrapper: {}',
+      '.wrapper: {}',
       {},
       { from: '/tmp/postcss-reason-/modules/example/one.css' }
     );

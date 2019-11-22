@@ -38,6 +38,17 @@ function classesFromNodes(nodes) {
   );
 }
 
+function readFile(path) {
+  try {
+    return fs.readFileSync(path);
+  } catch (error) {
+    if (error.code !== 'ENOENT') {
+      debug('Error reading file', path, error);
+    }
+    return;
+  }
+}
+
 module.exports = postcss.plugin('postcss-reason-modules', (_opts = {}) => {
   return (root, result) => {
     debug('nodes:', root.nodes);
@@ -71,8 +82,13 @@ module.exports = postcss.plugin('postcss-reason-modules', (_opts = {}) => {
     if (content === '') {
       debug(`Did not create empty file`);
     } else {
-      fs.writeFileSync(filename, content);
-      debug(`Wrote file to ${filename}`);
+      const previousContent = readFile(filename);
+      if (previousContent === content) {
+        debug('Content is the same, not writing file');
+      } else {
+        fs.writeFileSync(filename, content);
+        debug(`Wrote file to ${filename}`);
+      }
     }
   };
 });

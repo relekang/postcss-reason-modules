@@ -12,7 +12,8 @@
     "lint": "estlint .",
     "format": "yarn lint --fix",
     "test": "jest",
-    "release": "standard-version -i changelog.md"
+    "release": "standard-version -i changelog.md",
+    "example": "postcss --dir output example/*.css"
   },
   "author": "Rolf Erik Lekang <me@rolflekang.com>",
   "license": "MIT",
