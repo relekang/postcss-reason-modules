@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/relekang/postcss-reason-modules/compare/v1.0.0-rc.4...v1.0.0) (2019-11-22)
+
+
+### Features
+
+* Add detection if changes before writing ([ca2d9bc](https://github.com/relekang/postcss-reason-modules/commit/ca2d9bc83484fdf61dc2d6a686c8abf3ab0e179d))
+
+
+### Bug Fixes
+
+* Reset debug counter ([0cad2b3](https://github.com/relekang/postcss-reason-modules/commit/0cad2b39fb650b584036c42ec563344fe7095235))
+
 ## [1.0.0-rc.4](https://github.com/relekang/postcss-reason-modules/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2019-11-21)
 
 
