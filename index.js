@@ -8,29 +8,30 @@ let map = require('lodash/fp/map');
 let filter = require('lodash/fp/filter');
 
 let counter = 0;
-function dd(v) {
+function debugWrapper(v) {
   debug(counter++, v);
   return v;
 }
 
 function classesFromNodes(nodes) {
+  counter = 0;
   return Array.from(
     new Set(
       pipe([
         map(rule => rule.selector),
         filter(selector => selector && !selector.includes(':global')),
         flatMap(selector => (selector || '').split(' ')),
-        dd,
+        debugWrapper,
         flatMap(selector => (selector || '').split(' ')),
-        dd,
+        debugWrapper,
         map(selector => selector.replace(/:.*$/, '')),
-        dd,
+        debugWrapper,
         filter(selector => /^(\.[a-zA-Z0-9]+)+$/.test(selector)),
-        dd,
+        debugWrapper,
         flatMap(selector => selector.split('.')),
-        dd,
+        debugWrapper,
         filter(selector => selector !== ''),
-        dd,
+        debugWrapper,
         map(selector => selector.replace('.', '')),
       ])(nodes)
     )
